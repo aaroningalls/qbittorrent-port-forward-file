@@ -2,7 +2,8 @@
 set -e
 
 qbt_username="${QBT_USERNAME:-admin}"
-qbt_password="${QBT_PASSWORD:-adminadmin}"
+qbt_password="$( { cat /run/secrets/qb_passwd 2>/dev/null || echo "${QBT_PASSWORD:-admin}"; } )"
+
 qbt_addr="${QBT_ADDR:-http://localhost:8080}" # ex. http://10.0.1.48:8080
 port_file="${PORT_FILE:-/config/forwarded_port.txt}" # ex. /config/forwarded_port.txt
 
